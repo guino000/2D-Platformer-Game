@@ -16,12 +16,16 @@ public class GameMaster : MonoBehaviour
 
     public Transform playerPrefab;
     public Transform spawnPoint;
-    public int spawnDelay;
+    public float spawnDelay;
+    public GameObject spawnPrefab;
 
     public IEnumerator RespawnPlayer()
     {
+        GetComponent<AudioSource>().Play();
         yield return new WaitForSeconds(spawnDelay);
         Instantiate(playerPrefab, spawnPoint.position, spawnPoint.rotation);
+        GameObject clone = (GameObject)Instantiate(spawnPrefab, spawnPoint.position, spawnPoint.rotation);
+        Destroy(clone, 3f);
     }
 
     public static void KillPlayer(Player player)
