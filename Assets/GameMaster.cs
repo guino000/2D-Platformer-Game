@@ -6,7 +6,7 @@ public class GameMaster : MonoBehaviour
 {
     public static GameMaster gm;
 
-    private void Start()
+    private void Awake()
     {
         if(gm == null)
         {
