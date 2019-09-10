@@ -6,6 +6,12 @@ public class GameMaster : MonoBehaviour
 {
     public static GameMaster gm;
 
+    public static int _remaining_lives = 3;
+    public static int RemainingLives
+    {
+        get { return _remaining_lives; }
+    }
+
     private void Awake()
     {
         if(gm == null)
@@ -29,6 +35,15 @@ public class GameMaster : MonoBehaviour
 
     public CameraShake cameraShake;
 
+    [SerializeField]
+    private GameObject gameOverUI;
+
+    public void EndGame()
+    {
+        Debug.Log("GAME OVER");
+        gameOverUI.SetActive(true);
+    }
+
     public IEnumerator RespawnPlayer()
     {
         GetComponent<AudioSource>().Play();
@@ -41,7 +56,15 @@ public class GameMaster : MonoBehaviour
     public static void KillPlayer(Player player)
     {
         Destroy(player.gameObject);
-        gm.StartCoroutine(gm.RespawnPlayer());
+        _remaining_lives--;
+        if(_remaining_lives <= 0)
+        {
+            gm.EndGame();
+        }
+        else
+        {
+            gm.StartCoroutine(gm.RespawnPlayer());
+        }        
     }
 
     public static void KillEnemy(Enemy enemy)
