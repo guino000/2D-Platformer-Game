@@ -6,6 +6,8 @@ public class GameMaster : MonoBehaviour
 {
     public static GameMaster gm;
 
+    [SerializeField]
+    private int maxLives = 3;
     public static int _remaining_lives = 3;
     public static int RemainingLives
     {
@@ -20,11 +22,22 @@ public class GameMaster : MonoBehaviour
         }
     }
 
+    //Caching
+    private AudioManager audioManager;
+
     private void Start()
     {
+        _remaining_lives = maxLives;
         if(cameraShake == null)
         {
             Debug.LogError("No camera shake referenced on GameMaster!");
+        }
+
+        //Caching
+        audioManager = AudioManager.instance;
+        if(audioManager == null)
+        {
+            Debug.LogError("No AudioManager found in the scene!");
         }
     }
 
@@ -32,6 +45,7 @@ public class GameMaster : MonoBehaviour
     public Transform spawnPoint;
     public float spawnDelay;
     public GameObject spawnPrefab;
+    public string spawnSoundName;
 
     public CameraShake cameraShake;
 
@@ -46,10 +60,10 @@ public class GameMaster : MonoBehaviour
 
     public IEnumerator RespawnPlayer()
     {
-        GetComponent<AudioSource>().Play();
+        audioManager.PlaySound(spawnSoundName);
         yield return new WaitForSeconds(spawnDelay);
         Instantiate(playerPrefab, spawnPoint.position, spawnPoint.rotation);
-        GameObject clone = (GameObject)Instantiate(spawnPrefab, spawnPoint.position, spawnPoint.rotation);
+        GameObject clone = Instantiate(spawnPrefab, spawnPoint.position, spawnPoint.rotation);
         Destroy(clone, 3f);
     }
 
@@ -74,8 +88,14 @@ public class GameMaster : MonoBehaviour
 
     public void _KillEnemy(Enemy _enemy)
     {
+        // Death Sound
+        audioManager.PlaySound(_enemy.deathSound);
+
+        // Instantiate Particles
         GameObject clone = (GameObject) Instantiate(_enemy.deathParticles, _enemy.transform.position, Quaternion.identity).gameObject;
         Destroy(clone, 5f);
+
+        // Camera Shake
         cameraShake.Shake(_enemy.shakeAmt, _enemy.shakeLenght);
         Destroy(_enemy.gameObject);
     }

@@ -1,0 +1,88 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3561935324492501581
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 653865708804327648}
+  - component: {fileID: 186007055277375898}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &653865708804327648
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3561935324492501581}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &186007055277375898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3561935324492501581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cab448f604e7d64291bd3d8f85bf0e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: Respawn
+    clip: {fileID: 8300000, guid: ba36e640bf134fe45a90fabc34ad0b03, type: 3}
+    volume: 1
+    pitch: 1
+    randomVolume: 0.263
+    randomPitch: 0.331
+    loop: 0
+  - name: Music
+    clip: {fileID: 8300000, guid: 522ddc62a23fff543b58555db2ee3fd0, type: 3}
+    volume: 0.4
+    pitch: 1
+    randomVolume: 0
+    randomPitch: 0
+    loop: 1
+  - name: ButtonHover
+    clip: {fileID: 8300000, guid: 25936934ca054814a98bbf7276dde8f3, type: 3}
+    volume: 0.4
+    pitch: 1
+    randomVolume: 0.1
+    randomPitch: 0.1
+    loop: 0
+  - name: ButtonPress
+    clip: {fileID: 8300000, guid: 6e7d5ee8130ce47499a992c7f4092abf, type: 3}
+    volume: 0.45
+    pitch: 1
+    randomVolume: 0
+    randomPitch: 0
+    loop: 0
+  - name: DefaultShot
+    clip: {fileID: 8300000, guid: f748549c4e7717d49b6bcc06d031291b, type: 3}
+    volume: 0.7
+    pitch: 1
+    randomVolume: 0.1
+    randomPitch: 0.1
+    loop: 0
+  - name: Explosion
+    clip: {fileID: 8300000, guid: c76a44ce56c57b04092df3e30d6deec4, type: 3}
+    volume: 0.7
+    pitch: 1
+    randomVolume: 0.1
+    randomPitch: 0.1
+    loop: 0
