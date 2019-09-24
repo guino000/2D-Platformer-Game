@@ -8,8 +8,12 @@ public class WaveSpawner : MonoBehaviour
     {
         SPAWNING,
         WAITING,
-        COUNTING
+        COUNTING,
+        STOPPED
     };
+
+    public delegate void WavesCompleted();
+    public static event WavesCompleted OnWavesCompleted;
 
     [System.Serializable]
    public class Wave
@@ -22,15 +26,20 @@ public class WaveSpawner : MonoBehaviour
 
     public Wave[] waves;
     private int nextWave = 0;
+
+    [HideInInspector]
     public int NextWave
     {
-        get { return nextWave + 1; }
+        get
+        { return nextWave + 1; }
     }
 
     public Transform[] spawnPoints;
 
     public float timeBetweenWaves = 5f;
-    public float waveCountdown;
+    private float waveCountdown;
+
+    [HideInInspector]
     public float WaveCountdown
     {
         get { return waveCountdown + 1; }
@@ -38,7 +47,9 @@ public class WaveSpawner : MonoBehaviour
 
     private float searchCountdown = 1f;
 
-    public SpawnState state = SpawnState.COUNTING;
+    private SpawnState state = SpawnState.COUNTING;
+
+    [HideInInspector]
     public SpawnState State
     {
         get { return state; }
@@ -56,6 +67,9 @@ public class WaveSpawner : MonoBehaviour
 
     private void Update()
     {
+        if (state == SpawnState.STOPPED)
+            return;
+
         if(state == SpawnState.WAITING)
         {
             if (!EnemyIsAlive())
@@ -88,10 +102,12 @@ public class WaveSpawner : MonoBehaviour
         state = SpawnState.COUNTING;
         waveCountdown = timeBetweenWaves;
 
-        if(nextWave + 1 > waves.Length + 1)
+        if(nextWave + 1 >= waves.Length)
         {
             nextWave = 0;
             Debug.Log("All waves completed!");
+            state = SpawnState.STOPPED;
+            OnWavesCompleted();
         }
         else
         {

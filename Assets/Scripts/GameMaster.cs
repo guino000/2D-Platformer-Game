@@ -52,15 +52,41 @@ public class GameMaster : MonoBehaviour
 
     [SerializeField]
     private GameObject gameOverUI;
-
     [SerializeField]
     private string gameOverSound = "GameOver";
+
+    [SerializeField]
+    private GameObject levelCompletedUI;
+    [SerializeField]
+    private string levelCompletedSound = "LevelComplete";
+
+    [HideInInspector]
+    public bool acceptPlayerInput = true;
+
+    private void OnEnable()
+    {
+        WaveSpawner.OnWavesCompleted += EndLevel;
+    }
+
+    private void OnDisable()
+    {
+        WaveSpawner.OnWavesCompleted -= EndLevel;
+    }
 
     public void EndGame()
     {
         audioManager.PlaySound(gameOverSound);
         Debug.Log("GAME OVER");
         gameOverUI.SetActive(true);
+        acceptPlayerInput = false;
+    }
+
+    public void EndLevel()
+    {
+        audioManager.PlaySound(levelCompletedSound);
+        Debug.Log("Level completed!");
+        levelCompletedUI.SetActive(true);
+        acceptPlayerInput = false;
     }
 
     public IEnumerator RespawnPlayer()

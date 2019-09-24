@@ -48,8 +48,8 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: ba36e640bf134fe45a90fabc34ad0b03, type: 3}
     volume: 1
     pitch: 1
-    randomVolume: 0.263
-    randomPitch: 0.331
+    randomVolume: 0
+    randomPitch: 0
     loop: 0
   - name: Music
     clip: {fileID: 8300000, guid: 522ddc62a23fff543b58555db2ee3fd0, type: 3}
@@ -120,4 +120,11 @@ MonoBehaviour:
     pitch: 1
     randomVolume: 0.2
     randomPitch: 0.1
+    loop: 0
+  - name: LevelComplete
+    clip: {fileID: 8300000, guid: cf5db531f097ae24e866b4e930843650, type: 3}
+    volume: 1
+    pitch: 1
+    randomVolume: 0
+    randomPitch: 0
     loop: 0

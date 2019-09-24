@@ -75,6 +75,10 @@ public class PlatformerCharacter2D : MonoBehaviour
 
     public void Move(float move, bool crouch, bool jump)
     {
+        // Do nothing if player input is disabled by game master
+        if (!GameMaster.gm.acceptPlayerInput)
+            return;
+
         // If crouching, check to see if the character can stand up
         if (!crouch && m_Anim.GetBool("Crouch"))
         {

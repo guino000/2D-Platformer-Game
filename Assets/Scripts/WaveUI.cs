@@ -50,7 +50,7 @@ public class WaveUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        switch (spawner.state)
+        switch (spawner.State)
         {
             case WaveSpawner.SpawnState.COUNTING:
                 UpdateCountdownUI();
