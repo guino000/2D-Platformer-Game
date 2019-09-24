@@ -45,23 +45,29 @@ public class GameMaster : MonoBehaviour
     public Transform spawnPoint;
     public float spawnDelay;
     public GameObject spawnPrefab;
-    public string spawnSoundName;
+    public string respawnCountdownSoundName = "RespawnCountdown";
+    public string spawnSoundName = "Spawn";
 
     public CameraShake cameraShake;
 
     [SerializeField]
     private GameObject gameOverUI;
 
+    [SerializeField]
+    private string gameOverSound = "GameOver";
+
     public void EndGame()
     {
+        audioManager.PlaySound(gameOverSound);
         Debug.Log("GAME OVER");
         gameOverUI.SetActive(true);
     }
 
     public IEnumerator RespawnPlayer()
     {
-        audioManager.PlaySound(spawnSoundName);
+        audioManager.PlaySound(respawnCountdownSoundName);
         yield return new WaitForSeconds(spawnDelay);
+        audioManager.PlaySound(spawnSoundName);
         Instantiate(playerPrefab, spawnPoint.position, spawnPoint.rotation);
         GameObject clone = Instantiate(spawnPrefab, spawnPoint.position, spawnPoint.rotation);
         Destroy(clone, 3f);
@@ -72,7 +78,7 @@ public class GameMaster : MonoBehaviour
         Destroy(player.gameObject);
         _remaining_lives--;
         if(_remaining_lives <= 0)
-        {
+        {            
             gm.EndGame();
         }
         else

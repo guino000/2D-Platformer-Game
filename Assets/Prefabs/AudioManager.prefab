@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds:
-  - name: Respawn
+  - name: RespawnCountdown
     clip: {fileID: 8300000, guid: ba36e640bf134fe45a90fabc34ad0b03, type: 3}
     volume: 1
     pitch: 1
@@ -84,5 +84,40 @@ MonoBehaviour:
     volume: 0.7
     pitch: 1
     randomVolume: 0.1
+    randomPitch: 0.1
+    loop: 0
+  - name: DeathVoice
+    clip: {fileID: 8300000, guid: 73a9c62e5646c1848af196bb7926f13e, type: 3}
+    volume: 0.5
+    pitch: 1
+    randomVolume: 0
+    randomPitch: 0
+    loop: 0
+  - name: Grunt
+    clip: {fileID: 8300000, guid: 8e1b1cf3f5b5e5c44b721b35955406d9, type: 3}
+    volume: 0.4
+    pitch: 1
+    randomVolume: 0.1
+    randomPitch: 0.1
+    loop: 0
+  - name: Spawn
+    clip: {fileID: 8300000, guid: ce89433ad4db16041b4aee930d75ba73, type: 3}
+    volume: 0.6
+    pitch: 1
+    randomVolume: 0
+    randomPitch: 0
+    loop: 0
+  - name: GameOver
+    clip: {fileID: 8300000, guid: ec7276fe0bdd70646996f88823ce34ff, type: 3}
+    volume: 1
+    pitch: 1
+    randomVolume: 0
+    randomPitch: 0
+    loop: 0
+  - name: Landing
+    clip: {fileID: 8300000, guid: 6f00104de93d63a439aa1c97981403b4, type: 3}
+    volume: 0.4
+    pitch: 1
+    randomVolume: 0.2
     randomPitch: 0.1
     loop: 0
