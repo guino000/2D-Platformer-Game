@@ -58,7 +58,7 @@ public class Player : MonoBehaviour
     {
         if(transform.position.y <= fallBoundary)
         {
-            DamagePlayer(999999);
+            GameMaster.KillPlayer(this);
         }
     }
 
