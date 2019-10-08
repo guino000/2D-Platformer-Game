@@ -4,7 +4,7 @@ using Pathfinding;
 
 [RequireComponent (typeof (Rigidbody2D))]
 [RequireComponent(typeof(Seeker))]
-public class EnemyAI : MonoBehaviour
+public class EnemySeekerAI : MonoBehaviour
 {
     //What to chase?
     public Transform target;
@@ -94,7 +94,6 @@ public class EnemyAI : MonoBehaviour
 
     public void OnPathComplete(Path p)
     {
-        Debug.Log("We got a path. Did it have an error? " + p.error);
         if (!p.error)
         {
             path = p;
@@ -126,7 +125,6 @@ public class EnemyAI : MonoBehaviour
             if (pathIsEnded)
                 return;
 
-            Debug.Log("End of path reached;");
             pathIsEnded = true;
             return;
         }

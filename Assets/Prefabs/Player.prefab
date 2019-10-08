@@ -292,7 +292,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireRate: 2
-  Damage: 20
+  Damage: 40
   whatToHit:
     serializedVersion: 2
     m_Bits: 1587
@@ -453,7 +453,6 @@ MonoBehaviour:
   m_WhatIsGround:
     serializedVersion: 2
     m_Bits: 1079
-  landingSoundName: Landing
 --- !u!114 &3740435331489186157
 MonoBehaviour:
   m_ObjectHideFlags: 0

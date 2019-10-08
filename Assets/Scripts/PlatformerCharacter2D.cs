@@ -59,6 +59,10 @@ namespace UnityStandardAssets._2D
 
         public void Move(float move, bool crouch, bool jump)
         {
+            // Check if plazer input is blocked
+            if (!GameMaster.gm.AcceptPlayerInput)
+                return;
+
             // If crouching, check to see if the character can stand up
             if (!crouch && m_Anim.GetBool("Crouch"))
             {

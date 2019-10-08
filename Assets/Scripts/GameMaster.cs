@@ -60,8 +60,11 @@ public class GameMaster : MonoBehaviour
     [SerializeField]
     private string levelCompletedSound = "LevelComplete";
 
-    [HideInInspector]
-    public bool acceptPlayerInput = true;
+    private bool _acceptPlayerInput = true;
+    public bool AcceptPlayerInput
+    {
+        get { return _acceptPlayerInput; }
+    }
 
     private void OnEnable()
     {
@@ -78,7 +81,7 @@ public class GameMaster : MonoBehaviour
         audioManager.PlaySound(gameOverSound);
         Debug.Log("GAME OVER");
         gameOverUI.SetActive(true);
-        acceptPlayerInput = false;
+        _acceptPlayerInput = false;
     }
 
     public void EndLevel()
@@ -86,7 +89,7 @@ public class GameMaster : MonoBehaviour
         audioManager.PlaySound(levelCompletedSound);
         Debug.Log("Level completed!");
         levelCompletedUI.SetActive(true);
-        acceptPlayerInput = false;
+        _acceptPlayerInput = false;
     }
 
     public IEnumerator RespawnPlayer()
