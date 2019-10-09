@@ -361,8 +361,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 230742452}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.3, y: 10.85, z: 0}
-  m_LocalScale: {x: 5.1444187, y: 5.1444187, z: 5.1444187}
+  m_LocalPosition: {x: 7.508, y: 12.792, z: 0}
+  m_LocalScale: {x: 3.5599377, y: 3.5599377, z: 3.5599377}
   m_Children:
   - {fileID: 1898861146}
   m_Father: {fileID: 0}
@@ -464,6 +464,7 @@ MonoBehaviour:
   nextWaypointDistance: 3
   nextActionWaitSeconds: 3
   nextPathMoveTimeoutSeconds: 3
+  heightToReturn: 10
 --- !u!114 &230742459
 MonoBehaviour:
   m_ObjectHideFlags: 0

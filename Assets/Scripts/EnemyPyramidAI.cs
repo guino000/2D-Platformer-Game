@@ -6,7 +6,6 @@ public enum PyramidState
 {
     MOVING,
     SHOOTING,
-    WAITING,
     SEARCHING
 }
 
@@ -45,7 +44,7 @@ public class EnemyPyramidAI : MonoBehaviour
 
     //Current enemy state
     private PyramidState _state;
-    public float nextActionWaitSeconds = 3f;
+    public float nextActionWaitSeconds = 1f;
     public float nextPathMoveTimeoutSeconds = 3f;
     private float _timeoutCounter;
 
@@ -54,7 +53,30 @@ public class EnemyPyramidAI : MonoBehaviour
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
         _state = PyramidState.SEARCHING;       
-    }    
+    }
+
+    private void Update()
+    {
+        // Force transform to look at target        
+        LookAtPlayer();
+    }
+
+    private void LookAtPlayer()
+    {
+        if (target == null)
+            return;
+
+        Vector3 dir = (target.position - transform.position).normalized;
+        
+        if(dir.x >= 0)
+        {
+            GetComponent<SpriteRenderer>().flipX = true;
+        }
+        else
+        {
+            GetComponent<SpriteRenderer>().flipX = false;
+        }
+    }
 
     private void FindTarget()
     {
@@ -65,9 +87,18 @@ public class EnemyPyramidAI : MonoBehaviour
 
     private void Shoot()
     {
+        // Gradually Stop rb in order to shoot
+        _timeoutCounter += Time.deltaTime;
+        if (_timeoutCounter < nextActionWaitSeconds)
+        {
+            rb.velocity = rb.velocity * 0.9f;
+            return;
+        }
+
+        _timeoutCounter = 0;
         Debug.Log("Pyramid shot a beam!");
-        _state = PyramidState.WAITING;
-        return;
+        _state = PyramidState.SEARCHING;      
+     
     }
 
     private void SearchTarget()
@@ -138,18 +169,6 @@ public class EnemyPyramidAI : MonoBehaviour
         }
     }
 
-    private void WaitForNextAction()
-    {
-        _timeoutCounter += Time.deltaTime;
-        if (_timeoutCounter > nextActionWaitSeconds)
-        {
-            _timeoutCounter = 0;
-            _state = PyramidState.SEARCHING;
-            return;
-        }       
-        
-    }
-
     private void FixedUpdate()
     {     
         // Check state
@@ -166,10 +185,6 @@ public class EnemyPyramidAI : MonoBehaviour
             case PyramidState.SHOOTING:
                 // Shoot at target direction
                 Shoot();
-                break;
-            case PyramidState.WAITING:
-                // Wait for some seconds before moving again
-                WaitForNextAction();
                 break;
         }        
     }
